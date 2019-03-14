@@ -1,7 +1,7 @@
 N, W = map(int, input().split())
 items = []
 for _ in range(N):
-    w, v = map(int, input().split())
+    v, w = map(int, input().split())
     items.append({"w": w, "v": v})
 
 dp = [[0] * (W + 1) for _ in range(N + 1)]
