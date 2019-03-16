@@ -1,17 +1,18 @@
 S = input()
-dp = [[None] * 4 for _ in range(len(S) + 1)]
+
+dp = [[None] * 4 for _ in range(len(S))]
+dp.append([0, 0, 0, 1])
 next_str = ["A", "B", "C"]
+MOD = 10**9 + 7
+
 for i, s in enumerate(reversed(S)):
+    i = len(S) - i - 1
     for j in range(4):
-        if j == 3 and i == len(S):
-            dp[i][j] = 1
-        elif i == len(S):
-            dp[i][j] = 0
-        elif j == 3:
+        if j == 3:
             if s == "?":
-                dp[i][j] = 3 * dp[i + 1][j]
+                dp[i][j] = (3 * dp[i + 1][j]) % MOD
             else:
-                dp[i][j] = dp[i + 1][j]
+                dp[i][j] = dp[i + 1][j] % MOD
         else:
             if s == "?":
                 m_1 = 3
@@ -22,8 +23,7 @@ for i, s in enumerate(reversed(S)):
                     m_2 = 1
                 else:
                     m_2 = 0
-            dp[i][j] = m_1 * dp[i + 1][j] + m_2 * dp[i + 1][j + 1]
+            dp[i][j] = (m_1 * dp[i + 1][j] + m_2 * dp[i + 1][j + 1]) % MOD
 
 
-print(dp)
 print(dp[0][0])
